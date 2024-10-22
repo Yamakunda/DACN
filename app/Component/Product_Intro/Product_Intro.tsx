@@ -11,7 +11,7 @@ import Brand5 from '@/public/img/Product_Main/Brand_Premier.png';
 import Brand6 from '@/public/img/Product_Main/Brand_RoyalCanin.png';
 import Brand7 from '@/public/img/Product_Main/Brand_Whiskas.png';
 import { useState, useEffect } from 'react';
-import axios from '@/api/axios';
+import axios from 'axios';
 export default function Product_Main(){
    
       const [products, setProducts] = useState<any[]>([]);
@@ -19,7 +19,8 @@ export default function Product_Main(){
       useEffect(() => {
         const fetchProducts = async () => {
           try {
-            const response = await axios.get("/product/list");
+            const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+            const response = await axios.get(`${baseURL}/product/list`);
             setProducts(response.data.products);
             
           } catch (error) {
